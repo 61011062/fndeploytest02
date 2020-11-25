@@ -5,69 +5,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>2D Breakout Game - JavScript</title>
-    
-    <style>
-
-        #breakout{
-            width: 100%;
-            height: 100%;
-        }
-        #sound{
-            width: 30px;
-            height : 30px;
-            cursor: pointer;
-            position: absolute;
-            top : 465px;
-            left : 15px;
-        }
-        #gameover{
-            position: absolute;
-            width : 400px;
-            height: 500px;
-            background: rgba(0,0,0,0.5);
-            display: none;
-        }
-        #youwon{
-            width: 100px;
-            position: absolute;
-            top : 200px;
-            left : 150px;
-            display: none;
-        }
-        #youlose{
-            width:400px;
-            position: absolute;
-            top: 100px;
-            left : 0px;
-            display: none;
-        }
-        #restart{
-            position: absolute;
-            top: 310px;
-            left : 155px;
-            cursor: pointer;
-            font-size: 1.25em;
-            color : #FFF;
-        }
-    </style>
+    <title>Breakout!!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Germania+One">
+    <link rel="stylesheet" href="{% static './js/breakout/game.css' %}">
+    <link href="{% static './js/breakout/scoreboard.css' %}" type='text/css' media='screen' rel='stylesheet'>
+    <script defer> var rootContext = 'static/js/breakout/' </script>
+    <script src="{% static './js/breakout/components.js' %}"defer></script>
+    <script src="{% static './js/breakout/game.js' %}"defer></script>
 </head>
 <body>
-    <div class="sound">
-        <img src="{% static './js/breakout/img/SOUND_ON.png' %}" alt="" id="sound">
-    </div>
-    
-    <div id="gameover">
-        <img src="{% static './js/breakout/img/youwon.png' %}" alt="" id="youwon">
-        <img src="{% static './js/breakout/img/gameover.png' %}" alt="" id="youlose">
-        <div id="restart">Play Again!</div>
-    </div>
-   
-    <canvas id="breakout" ></canvas>
-    
-    <script> var rootContext = 'static/js/breakout/' </script>
-    <script src="{% static './js/breakout/components.js' %}"></script>
-    <script src="{% static './js/breakout/game.js' %}"></script>
+    <div id='viewport'>
+        <div id="nicknamescreen">
+            <input id='nickname' value="{{user.username}}">
+        </div>
+        <div class="sound">
+            <img src="{% static './js/breakout/img/SOUND_ON.png' %}" alt="" id="sound">
+        </div>
+        <canvas id="breakout"></canvas>
+        <div id="gameover">
+            <img src="{% static './js/breakout/img/gameover.png' %}" alt="" id="youlose">
+            <img src="{% static './js/breakout/img/playagain.png' %}" alt="" id="restart">
+        </div>
+        <div id="gamestart">
+            <img src="{% static './js/breakout/img/start.png' %}" alt="" id="start">
+        </div>
+        <div id="score">
+            <img src="{% static './js/breakout/img/showscore.png' %}" alt="" id="showscore">
+        </div>
+        <div id='inputscore'>
+            Score : 0
+        </div>
+        <div id='finalscore'>
+            <div id='yourscore'></div>
+        </div>
+        <div id='scoreboard'>
+            <div id='title'>HIGH SCORES</div>
+                <ol>
+                    <li id='top1'></li>
+                    <li id='top2'></li>
+                    <li id='top3'></li>
+                </ol>
+            <img src="{% static './js/breakout/img/back.png' %}" alt="" id="back">
+        </div>
+    </div>    
+    <script src="{% static './js/breakout/scoreboard.js' %}"></script>
 </body>
 </html>
 {% endblock %}

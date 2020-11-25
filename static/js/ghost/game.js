@@ -32,23 +32,15 @@ var screenBorder = parseFloat(getComputedStyle(screen).getPropertyValue('border-
 screenHeight -= (ghostHeight + (screenBorder * 2));  //*2 because there's 2 borders
 screenWidth -= (ghostWidth + (screenBorder * 2));
 
-//make delay for set interval
-var job_result = { job_result };
-var loadingMessage = function (){
-    if (!job_result) {
-        document.write("Loading ...");
-    }
-    else {
-        return
-    }
-}
 
-setInterval(() => loadingMessage, 1000);
+
+
 
 function loadMenu(){
     menu.style.display = 'block';
     nickNameScreen.style.display = 'none';
 }
+
 
 //function to start the game
 function start(){
@@ -59,7 +51,7 @@ function start(){
     score.style.display = 'block';
     timeleft.style.display ='block';
 
-    intervalGhost = setInterval(() => newPosition, 500); //interval to update the ghost position
+    //intervalGhost = setInterval(() => newPosition, 500); //interval to update the ghost position
     startCountdown();
 
     setTimeout(stop,  60 * 1000); //this makes the game end - at 1 minute
@@ -68,7 +60,7 @@ function start(){
 
 //I need to find a better way to do this countdown
 function startCountdown(){
-    let seconds = 30;
+    let seconds = 59;
     timeleft.innerHTML = '0:' + seconds;
     intervalTimeLeft = setInterval(function(){
         seconds--;
@@ -109,8 +101,10 @@ function newPosition(){
     let newPos_width = Math.random() * screenWidth;
     let newPos_height = Math.random() * screenHeight;
 
-    ghost.style.left = newPos_width;
-    ghost.style.top = newPos_height;
+     //ghost.style.left = newPos_width;
+    //ghost.style.top = newPos_height;
+    ghost.style.setProperty("top",newPos_height+"px");
+    ghost.style.setProperty("left",newPos_width+"px");
 
 }
 
@@ -123,8 +117,6 @@ function scoreIt(){
     scoreNumber += 1;
     score.innerHTML = 'Score: ' + scoreNumber;
     newPosition();
-    clearInterval(intervalGhost);
-    intervalGhost = setInterval(newPosition, 500);
 }
 
 

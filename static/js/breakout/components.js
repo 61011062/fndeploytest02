@@ -4,6 +4,9 @@
 const BG_IMG = new Image();
 BG_IMG.src = rootContext +"img/bg2.jpg";
 
+const SPEED_IMG = new Image();
+SPEED_IMG.src = rootContext +"img/speed.png";
+
 const LEVEL_IMG = new Image();
 LEVEL_IMG.src = rootContext +"img/level.png";
 

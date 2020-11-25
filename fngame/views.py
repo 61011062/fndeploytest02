@@ -16,6 +16,8 @@ def account(request):
     return render(request, 'frontend/myaccount.html')
 def about(request):
     return render(request, 'frontend/about.html')
+def change_password(request):
+    return render(request, 'frontend/change_password.html')
 
 def adduser(request):
     username=request.POST['username']
@@ -58,3 +60,21 @@ def userin(request):
 def userout(request):
     auth.logout(request)
     return redirect('/')
+
+def changepassword (request):
+    password=request.POST['password']
+    pwd_confirm=request.POST['pwd_confirm']
+    if password == pwd_confirm :
+        try:
+            checkemail=User.objects.get(email=request.POST['email'])
+            checkemail.set_password(password)
+            checkemail.save()
+            messages.info(request,'Your password is change.')
+            return redirect('/myaccount')
+        except  User.DoesNotExist:
+                checkemail = None
+                messages.info(request,'Email is not found.')
+                return redirect('/change_password')
+    else :
+            messages.info(request, 'Passwords do not match.')
+            return redirect('/change_password')
